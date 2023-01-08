@@ -2,7 +2,7 @@ export default function Home() {
   return (
     <>
       <div>
-        <p>susu app test</p>
+        <p>susu app </p>
       </div>
     </>
   )
