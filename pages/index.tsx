@@ -2,7 +2,7 @@ export default function Home() {
   return (
     <>
       <div>
-        <p>susu app </p>
+        <p>back to susu </p>
       </div>
     </>
   )
