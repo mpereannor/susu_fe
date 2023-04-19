@@ -9,6 +9,8 @@ import {
   FormErrorMessage,
   Heading,
   Input,
+  InputGroup,
+  InputRightElement,
   SimpleGrid,
   Stack,
   Text,
@@ -20,8 +22,12 @@ import { SubmitHandler, useForm } from 'react-hook-form'
 import Image from 'next/image'
 import susuAuthPic from '../../../assets/susu_auth.svg'
 import { ToggleColor } from '../../../lib/colorMode'
+import useToggle from '../../../hooks/useToggle'
+import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai'
 
 const Login = () => {
+  const [value, toggle, setValue] = useToggle()
+
   const bg = useColorModeValue('white', 'susuDarkBg')
   const color = useColorModeValue('susuColor', 'white')
 
@@ -49,6 +55,7 @@ const Login = () => {
     resolver: yupResolver(loginSchema),
     mode: 'onBlur',
   })
+  const togglePwd = () => setValue((x: boolean) => !x)
 
   const onSubmit: SubmitHandler<ILoginInputs> = (data) => {
     console.log('data', data)
@@ -95,21 +102,47 @@ const Login = () => {
                 />
 
                 {/* <Box> */}
-                <Input
-                  w={'300px'}
-                  h={'60px'}
-                  id="pwd"
-                  placeholder="Password"
-                  _placeholder={{
-                    color: 'gray.400',
-                  }}
-                  _focus={{
-                    borderColor: '#20ddbe',
-                  }}
-                  {...register('pwd', {
-                    required: 'Password is required',
-                  })}
-                />
+                <InputGroup>
+                  {value ? (
+                    <InputRightElement
+                      pr={5}
+                      pt={5}
+                      // eslint-disable-next-line react/no-children-prop
+                      children={
+                        <AiFillEyeInvisible
+                          color="#20ddbe"
+                          size={20}
+                          onClick={toggle}
+                        />
+                      }
+                    />
+                  ) : (
+                    <InputRightElement
+                      pr={5}
+                      pt={5}
+                      // eslint-disable-next-line react/no-children-prop
+                      children={
+                        <AiFillEye color="#20ddbe" size={20} onClick={toggle} />
+                      }
+                    />
+                  )}
+                  <Input
+                    w={'300px'}
+                    h={'60px'}
+                    id="pwd"
+                    type={value ? 'text' : 'password'}
+                    placeholder="Password"
+                    _placeholder={{
+                      color: 'gray.400',
+                    }}
+                    _focus={{
+                      borderColor: '#20ddbe',
+                    }}
+                    {...register('pwd', {
+                      required: 'Password is required',
+                    })}
+                  />
+                </InputGroup>
                 <SimpleGrid columns={2} spacing={4}>
                   <Center
                     bg="rgba(32, 221, 190, 0.2)"
