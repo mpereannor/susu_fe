@@ -21,9 +21,10 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import Image from 'next/image'
 import susuAuthPic from '../../../assets/susu_auth.svg'
-import { ToggleColor } from '../../../lib/colorMode'
 import useToggle from '../../../hooks/useToggle'
 import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai'
+import { IoMdCheckmarkCircle } from 'react-icons/io'
+import Link from 'next/link'
 
 const Login = () => {
   const [value, toggle, setValue] = useToggle()
@@ -55,7 +56,6 @@ const Login = () => {
     resolver: yupResolver(loginSchema),
     mode: 'onBlur',
   })
-  const togglePwd = () => setValue((x: boolean) => !x)
 
   const onSubmit: SubmitHandler<ILoginInputs> = (data) => {
     console.log('data', data)
@@ -83,7 +83,7 @@ const Login = () => {
           </Box>
           <form onSubmit={handleSubmit(onSubmit)}>
             <FormControl>
-              <Stack spacing={10}>
+              <Stack spacing={10} align={'center'}>
                 <Input
                   w={'300px'}
                   h={'60px'}
@@ -102,7 +102,7 @@ const Login = () => {
                 />
 
                 {/* <Box> */}
-                <InputGroup>
+                <InputGroup w={'300px'}>
                   {value ? (
                     <InputRightElement
                       pr={5}
@@ -127,7 +127,6 @@ const Login = () => {
                     />
                   )}
                   <Input
-                    w={'300px'}
                     h={'60px'}
                     id="pwd"
                     type={value ? 'text' : 'password'}
@@ -143,48 +142,83 @@ const Login = () => {
                     })}
                   />
                 </InputGroup>
-                <SimpleGrid columns={2} spacing={4}>
-                  <Center
+                <SimpleGrid spacing={4} columns={[1, null, 2]}>
+                  <Box
                     bg="rgba(32, 221, 190, 0.2)"
-                    height="40px"
                     borderRadius={5}
+                    display={'flex'}
+                    paddingY={4}
+                    paddingX={2}
+                    alignItems={'center'}
                   >
                     <Text
                       textAlign={'left'}
                       fontSize={10}
                       fontWeight={'medium'}
                       color={'#718096'}
+                      mr={2}
                     >
                       At least 8 characters
                     </Text>
-                  </Center>
-                  <Center
+                    <IoMdCheckmarkCircle color="#20ddbe" />
+                  </Box>
+                  <Box
                     bg="rgba(32, 221, 190, 0.2)"
-                    height="40px"
+                    display={'flex'}
+                    paddingY={4}
+                    paddingX={2}
                     borderRadius={5}
+                    alignItems={'center'}
                   >
-                    <Text fontSize={10} fontWeight={'medium'} color={'#718096'}>
+                    <Text
+                      textAlign={'left'}
+                      fontSize={10}
+                      fontWeight={'medium'}
+                      color={'#718096'}
+                      mr={2}
+                    >
                       At least one number
                     </Text>
-                  </Center>
-                  <Center
+                    <IoMdCheckmarkCircle color="#20ddbe" />
+                  </Box>
+                  <Box
                     bg="rgba(32, 221, 190, 0.2)"
-                    height="40px"
+                    display={'flex'}
+                    paddingY={4}
+                    paddingX={2}
                     borderRadius={5}
+                    alignItems={'center'}
                   >
-                    <Text fontSize={10} fontWeight={'medium'} color={'#718096'}>
+                    <Text
+                      textAlign={'left'}
+                      fontSize={10}
+                      fontWeight={'medium'}
+                      color={'#718096'}
+                      mr={2}
+                    >
                       At least one uppercase letter
                     </Text>
-                  </Center>
-                  <Center
+                    <IoMdCheckmarkCircle color="#20ddbe" />
+                  </Box>
+                  <Box
                     bg="rgba(32, 221, 190, 0.2)"
-                    height="40px"
                     borderRadius={5}
+                    display={'flex'}
+                    paddingY={4}
+                    paddingX={2}
+                    alignItems={'center'}
                   >
-                    <Text fontSize={10} fontWeight={'medium'} color={'#718096'}>
+                    <Text
+                      textAlign={'left'}
+                      fontSize={10}
+                      fontWeight={'medium'}
+                      color={'#718096'}
+                      mr={2}
+                    >
                       At least one special character
                     </Text>
-                  </Center>
+                    <IoMdCheckmarkCircle color="#20ddbe" />
+                  </Box>
                 </SimpleGrid>
                 <FormErrorMessage>
                   {errors.username && errors.username.message}
@@ -200,12 +234,19 @@ const Login = () => {
                 >
                   Continue
                 </Button>
+                <Box display={'flex'} justifyContent="center">
+                  <Text size="12px" fontWeight={500} marginRight={4}>
+                    New here?
+                  </Text>
+                  <Link href={'/auth/signup'}>
+                    <Text color="#20ddbe" _hover={{ color: 'teal.400' }}>
+                      Create an account
+                    </Text>
+                  </Link>
+                </Box>
               </Stack>
             </FormControl>
           </form>
-          <Text size="12px" fontWeight={500} color={'#20ddbe'}>
-            New here? Create an account
-          </Text>
         </Stack>
       </Flex>
       <Flex flex={1} pos={'relative'} display={{ base: 'none', md: 'block' }}>
