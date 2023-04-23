@@ -12,6 +12,7 @@ import {
   InputRightElement,
   Stack,
   Text,
+  textDecoration,
   useColorModeValue,
 } from '@chakra-ui/react'
 import Image from 'next/image'
@@ -223,15 +224,44 @@ const SignUp = () => {
                 >
                   Continue
                 </Button>
-                <Text
-                  fontSize={'sm'}
-                  textAlign="center"
-                  fontWeight={40}
+                <Box
+                  fontSize={10}
+                  fontWeight={'medium'}
+                  color={'#718096'}
                   w={['300px', null, '400px']}
+                  // textAlign="left"
                 >
-                  By creating an account, you agree to Susu’s Privacy Policy,
-                  Terms of Use, and Cookie Policy.
-                </Text>
+                  By creating an account, you agree to Susu’s
+                  <span
+                    style={{
+                      color: ' #20ddbe',
+                      textDecoration: 'underline',
+                      margin: '0 4px',
+                    }}
+                  >
+                    Privacy Policy,
+                  </span>
+                  <span
+                    style={{
+                      color: ' #20ddbe',
+                      textDecoration: 'underline',
+                      margin: '0 4px',
+                    }}
+                  >
+                    Terms of Use
+                  </span>
+                  and
+                  <span
+                    style={{
+                      color: ' #20ddbe',
+                      textDecoration: 'underline',
+                      margin: '0 4px',
+                    }}
+                  >
+                    Cookie Policy
+                  </span>
+                  .
+                </Box>
                 <Box textAlign={'center'}>
                   <Link href={'/auth/login'}>
                     <Text color="#20ddbe" _hover={{ color: 'teal.400' }}>
