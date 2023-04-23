@@ -6,11 +6,11 @@ const config: ThemeConfig = {
   useSystemColorMode: false,
 }
 
-
-const customTheme = {
+export const theme = extendTheme({
   config,
   fonts: {
     body: nextFont.style.fontFamily,
+    subHeading: nextFont.style.fontFamily,
     heading: nextFont.style.fontFamily,
   },
   colors: {
@@ -23,5 +23,4 @@ const customTheme = {
     susuDarkBg: '#1F2023',
     susuColor: '#1A202C',
   },
-}
-export const theme = extendTheme({ customTheme })
+})

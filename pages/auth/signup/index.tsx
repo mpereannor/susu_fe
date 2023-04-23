@@ -95,7 +95,7 @@ const SignUp = () => {
                   h={'60px'}
                   border={'1px'}
                   _focus={{
-                    borderColor: '#20ddbe',
+                    borderColor: 'primary.500',
                   }}
                   _placeholder={{
                     color: 'gray.400',
