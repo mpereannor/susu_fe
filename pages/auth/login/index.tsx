@@ -3,7 +3,6 @@
 import {
   Box,
   Button,
-  Center,
   Flex,
   FormControl,
   FormErrorMessage,
@@ -11,7 +10,6 @@ import {
   Input,
   InputGroup,
   InputRightElement,
-  SimpleGrid,
   Stack,
   Text,
   useColorModeValue,
@@ -23,11 +21,10 @@ import Image from 'next/image'
 import susuAuthPic from '../../../assets/susu_auth.svg'
 import useToggle from '../../../hooks/useToggle'
 import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai'
-import { IoMdCheckmarkCircle } from 'react-icons/io'
 import Link from 'next/link'
 
 const Login = () => {
-  const [value, toggle, setValue] = useToggle()
+  const [value, toggle] = useToggle()
 
   const bg = useColorModeValue('white', 'susuDarkBg')
   const color = useColorModeValue('susuColor', 'white')
@@ -85,7 +82,7 @@ const Login = () => {
             <FormControl>
               <Stack spacing={10} align={'center'}>
                 <Input
-                  w={'300px'}
+                  w={['300px', null, '400px']}
                   h={'60px'}
                   border={'1px'}
                   id="username"
@@ -101,8 +98,7 @@ const Login = () => {
                   })}
                 />
 
-                {/* <Box> */}
-                <InputGroup w={'300px'}>
+                <InputGroup w={['300px', null, '400px']}>
                   {value ? (
                     <InputRightElement
                       pr={5}
@@ -142,91 +138,13 @@ const Login = () => {
                     })}
                   />
                 </InputGroup>
-                <SimpleGrid spacing={4} columns={[1, null, 2]}>
-                  <Box
-                    bg="rgba(32, 221, 190, 0.2)"
-                    borderRadius={5}
-                    display={'flex'}
-                    paddingY={4}
-                    paddingX={2}
-                    alignItems={'center'}
-                  >
-                    <Text
-                      textAlign={'left'}
-                      fontSize={10}
-                      fontWeight={'medium'}
-                      color={'#718096'}
-                      mr={2}
-                    >
-                      At least 8 characters
-                    </Text>
-                    <IoMdCheckmarkCircle color="#20ddbe" />
-                  </Box>
-                  <Box
-                    bg="rgba(32, 221, 190, 0.2)"
-                    display={'flex'}
-                    paddingY={4}
-                    paddingX={2}
-                    borderRadius={5}
-                    alignItems={'center'}
-                  >
-                    <Text
-                      textAlign={'left'}
-                      fontSize={10}
-                      fontWeight={'medium'}
-                      color={'#718096'}
-                      mr={2}
-                    >
-                      At least one number
-                    </Text>
-                    <IoMdCheckmarkCircle color="#20ddbe" />
-                  </Box>
-                  <Box
-                    bg="rgba(32, 221, 190, 0.2)"
-                    display={'flex'}
-                    paddingY={4}
-                    paddingX={2}
-                    borderRadius={5}
-                    alignItems={'center'}
-                  >
-                    <Text
-                      textAlign={'left'}
-                      fontSize={10}
-                      fontWeight={'medium'}
-                      color={'#718096'}
-                      mr={2}
-                    >
-                      At least one uppercase letter
-                    </Text>
-                    <IoMdCheckmarkCircle color="#20ddbe" />
-                  </Box>
-                  <Box
-                    bg="rgba(32, 221, 190, 0.2)"
-                    borderRadius={5}
-                    display={'flex'}
-                    paddingY={4}
-                    paddingX={2}
-                    alignItems={'center'}
-                  >
-                    <Text
-                      textAlign={'left'}
-                      fontSize={10}
-                      fontWeight={'medium'}
-                      color={'#718096'}
-                      mr={2}
-                    >
-                      At least one special character
-                    </Text>
-                    <IoMdCheckmarkCircle color="#20ddbe" />
-                  </Box>
-                </SimpleGrid>
+
                 <FormErrorMessage>
                   {errors.username && errors.username.message}
                 </FormErrorMessage>
-                {/* </Box> */}
 
                 <Button
-                  w={'300px'}
+                  w={['300px', null, '400px']}
                   h={'60px'}
                   color="white"
                   _hover={{ bg: 'teal.400' }}
@@ -260,7 +178,6 @@ const Login = () => {
           object-fit="cover"
         />
       </Flex>
-      {/* <ToggleColor /> */}
     </Stack>
   )
 }

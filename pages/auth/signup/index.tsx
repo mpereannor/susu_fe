@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import {
+  Box,
   Button,
   Flex,
   FormControl,
@@ -7,6 +8,8 @@ import {
   FormLabel,
   Heading,
   Input,
+  InputGroup,
+  InputRightElement,
   Stack,
   Text,
   useColorModeValue,
@@ -18,8 +21,13 @@ import susuAuthPic from '../../../assets/susu_auth.svg'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
-
+import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai'
+import Link from 'next/link'
+import useToggle from '../../../hooks/useToggle'
+import PwdHelper from '../../components/elements/PwdHelper'
 const SignUp = () => {
+  const [value, toggle] = useToggle()
+
   const bg = useColorModeValue('white', 'susuDarkBg')
   const color = useColorModeValue('susuColor', 'white')
   // const { data: session } = useSession()
@@ -64,58 +72,188 @@ const SignUp = () => {
   return (
     <Stack minH={'100vh'} direction={{ base: 'column', md: 'row' }}>
       <Flex flex={1} mx={{ base: 4, md: 0 }} bg={bg} color={color}>
-        <Stack spacing={4} w={'full'}>
-          <Heading textAlign={'center'} fontSize={20} fontWeight={'semibold'}>
-            Create a new account
-          </Heading>
-          <Text>Your account is safe with us.</Text>
+        <Stack
+          spacing={8}
+          w={'full'}
+          height={'100%'}
+          align={'center'}
+          paddingTop={'5vh'}
+        >
+          <Box>
+            <Heading textAlign={'center'} fontSize={20} fontWeight={'semibold'}>
+              Create a new account
+            </Heading>
+            <Text>Your account is safe with us.</Text>
+          </Box>
           <form onSubmit={handleSubmit(onSubmit)}>
             <FormControl>
-              <FormLabel htmlFor="email">Email Address</FormLabel>
-              <Input
-                id="username"
-                placeholder="Username"
-                {...register('username', {
-                  required: 'Username is required',
-                })}
-              />
-              <Input
-                id="email"
-                placeholder="Email Address"
-                {...register('email', {
-                  required: 'Email is required',
-                })}
-              />
-              <Input
-                id="pwd"
-                placeholder="Password"
-                {...register('pwd', {
-                  required: 'Password is required',
-                })}
-              />
-              <Input
-                id="confirm_pwd"
-                placeholder="Confirm Password"
-                {...register('confirm_pwd', {
-                  required: 'Password does not match',
-                })}
-              />
-              <FormErrorMessage>
-                {errors.email && errors.email.message}
-              </FormErrorMessage>
-              <Button>Continue</Button>
-              <Text>
-                By creating an account, you agree to Susu’s Privacy Policy,
-                Terms of Use, and Cookie Policy.
-              </Text>
+              <Stack spacing={6} align={'center'}>
+                <Input
+                  id="username"
+                  w={['300px', null, '400px']}
+                  h={'60px'}
+                  border={'1px'}
+                  _focus={{
+                    borderColor: '#20ddbe',
+                  }}
+                  _placeholder={{
+                    color: 'gray.400',
+                  }}
+                  placeholder="Username"
+                  {...register('username', {
+                    required: 'Username is required',
+                  })}
+                />
+                <FormErrorMessage>
+                  {errors.username && errors.username.message}
+                </FormErrorMessage>
+                <Input
+                  id="email"
+                  w={['300px', null, '400px']}
+                  h={'60px'}
+                  border={'1px'}
+                  _focus={{
+                    borderColor: '#20ddbe',
+                  }}
+                  _placeholder={{
+                    color: 'gray.400',
+                  }}
+                  placeholder="Email Address"
+                  {...register('email', {
+                    required: 'Email is required',
+                  })}
+                />
+                <InputGroup w={['300px', null, '400px']}>
+                  {value ? (
+                    <InputRightElement
+                      pr={5}
+                      pt={5}
+                      // eslint-disable-next-line react/no-children-prop
+                      children={
+                        <AiFillEyeInvisible
+                          color="#20ddbe"
+                          size={20}
+                          onClick={toggle}
+                        />
+                      }
+                    />
+                  ) : (
+                    <InputRightElement
+                      pr={5}
+                      pt={5}
+                      // eslint-disable-next-line react/no-children-prop
+                      children={
+                        <AiFillEye color="#20ddbe" size={20} onClick={toggle} />
+                      }
+                    />
+                  )}
+                  <Input
+                    id="pwd"
+                    h={'60px'}
+                    type={value ? 'text' : 'password'}
+                    placeholder="Password"
+                    _placeholder={{
+                      color: 'gray.400',
+                    }}
+                    _focus={{
+                      borderColor: '#20ddbe',
+                    }}
+                    {...register('pwd', {
+                      required: 'Password is required',
+                    })}
+                  />
+                </InputGroup>
+                <FormErrorMessage>
+                  {errors.pwd && errors.pwd.message}
+                </FormErrorMessage>
+                {errors.pwd && errors.pwd.message ? (
+                  <PwdHelper unverified={false} />
+                ) : (
+                  <PwdHelper unverified={true} />
+                )}
+                <InputGroup w={['300px', null, '400px']}>
+                  {value ? (
+                    <InputRightElement
+                      pr={5}
+                      pt={5}
+                      // eslint-disable-next-line react/no-children-prop
+                      children={
+                        <AiFillEyeInvisible
+                          color="#20ddbe"
+                          size={20}
+                          onClick={toggle}
+                        />
+                      }
+                    />
+                  ) : (
+                    <InputRightElement
+                      pr={5}
+                      pt={5}
+                      // eslint-disable-next-line react/no-children-prop
+                      children={
+                        <AiFillEye color="#20ddbe" size={20} onClick={toggle} />
+                      }
+                    />
+                  )}
+                  <Input
+                    id="confirm_pwd"
+                    placeholder="Confirm Password"
+                    {...register('confirm_pwd', {
+                      required: 'Password does not match',
+                    })}
+                    h={'60px'}
+                    type={value ? 'text' : 'password'}
+                    _placeholder={{
+                      color: 'gray.400',
+                    }}
+                    _focus={{
+                      borderColor: '#20ddbe',
+                    }}
+                  />
+                </InputGroup>
+                <FormErrorMessage>
+                  {errors.confirm_pwd && errors.confirm_pwd.message}
+                </FormErrorMessage>
+                <Button
+                  w={['300px', null, '400px']}
+                  h={'60px'}
+                  color="white"
+                  _hover={{ bg: 'teal.400' }}
+                  bg="#20ddbe"
+                >
+                  Continue
+                </Button>
+                <Text
+                  fontSize={'sm'}
+                  textAlign="center"
+                  fontWeight={40}
+                  w={['300px', null, '400px']}
+                >
+                  By creating an account, you agree to Susu’s Privacy Policy,
+                  Terms of Use, and Cookie Policy.
+                </Text>
+                <Box textAlign={'center'}>
+                  <Link href={'/auth/login'}>
+                    <Text color="#20ddbe" _hover={{ color: 'teal.400' }}>
+                      Login instead
+                    </Text>
+                  </Link>
+                </Box>
+              </Stack>
             </FormControl>
           </form>
-          <Text>Sign in instead</Text>
-
         </Stack>
       </Flex>
       <Flex flex={1} pos={'relative'} display={{ base: 'none', md: 'block' }}>
-        <Image fill alt="susu_auth" src={susuAuthPic} object-fit="cover" />
+        <Image
+          style={{
+            width: '100%',
+            height: 'auto',
+          }}
+          alt="susu_auth"
+          src={susuAuthPic}
+          object-fit="cover"
+        />
       </Flex>
     </Stack>
   )
