@@ -5,14 +5,12 @@ import {
   Flex,
   FormControl,
   FormErrorMessage,
-  FormLabel,
   Heading,
   Input,
   InputGroup,
   InputRightElement,
   Stack,
   Text,
-  textDecoration,
   useColorModeValue,
 } from '@chakra-ui/react'
 import Image from 'next/image'
@@ -39,6 +37,21 @@ const SignUp = () => {
     pwd: string
     confirm_pwd: string
   }
+  const signUpValues = {
+    username: '',
+    email: '',
+    password: '',
+    confirm_pwd: '',
+  }
+
+  const latestSignUpValues = {
+    username: '',
+    email: '',
+    password: '',
+    confirm_pwd: '',
+  }
+
+  const isError = signUpValues === signUpValues
   const signUpSchema = yup.object().shape({
     email: yup
       .string()
@@ -55,7 +68,7 @@ const SignUp = () => {
     confirm_pwd: yup
       .string()
       .required('Repeat password')
-      .oneOf([yup.ref('password')], 'Passwords does not match'),
+      .oneOf([yup.ref('password')], 'Passwords do not match'),
   })
 
   const {
@@ -63,6 +76,7 @@ const SignUp = () => {
     register,
     formState: { errors, isSubmitting, isSubmitted },
   } = useForm<ISignUpInputs>({
+    defaultValues: signUpValues,
     resolver: yupResolver(signUpSchema),
     mode: 'onBlur',
   })
@@ -87,7 +101,7 @@ const SignUp = () => {
             <Text>Your account is safe with us.</Text>
           </Box>
           <form onSubmit={handleSubmit(onSubmit)}>
-            <FormControl>
+            <FormControl isInvalid={isError}>
               <Stack spacing={6} align={'center'}>
                 <Input
                   id="username"
@@ -105,9 +119,11 @@ const SignUp = () => {
                     required: 'Username is required',
                   })}
                 />
-                <FormErrorMessage>
-                  {errors.username && errors.username.message}
-                </FormErrorMessage>
+                {isError && (
+                  <FormErrorMessage fontSize={10} fontWeight={'medium'}>
+                    {errors.username && errors.username.message}
+                  </FormErrorMessage>
+                )}
                 <Input
                   id="email"
                   w={['300px', null, '400px']}
@@ -124,6 +140,11 @@ const SignUp = () => {
                     required: 'Email is required',
                   })}
                 />
+                {isError && (
+                  <FormErrorMessage fontSize={10} fontWeight={'medium'}>
+                    {errors.email && errors.email.message}
+                  </FormErrorMessage>
+                )}
                 <InputGroup w={['300px', null, '400px']}>
                   {value ? (
                     <InputRightElement
@@ -164,14 +185,12 @@ const SignUp = () => {
                     })}
                   />
                 </InputGroup>
-                <FormErrorMessage>
-                  {errors.pwd && errors.pwd.message}
-                </FormErrorMessage>
-                {errors.pwd && errors.pwd.message ? (
+                {!isError ? (
                   <PwdHelper unverified={false} />
                 ) : (
                   <PwdHelper unverified={true} />
                 )}
+
                 <InputGroup w={['300px', null, '400px']}>
                   {value ? (
                     <InputRightElement
@@ -212,15 +231,18 @@ const SignUp = () => {
                     }}
                   />
                 </InputGroup>
-                <FormErrorMessage>
-                  {errors.confirm_pwd && errors.confirm_pwd.message}
-                </FormErrorMessage>
+                {isError && (
+                  <FormErrorMessage fontSize={10} fontWeight={'medium'}>
+                    {errors.confirm_pwd && errors.confirm_pwd.message}
+                  </FormErrorMessage>
+                )}
                 <Button
                   w={['300px', null, '400px']}
                   h={'60px'}
                   color="white"
                   _hover={{ bg: 'teal.400' }}
                   bg="#20ddbe"
+                  type="submit"
                 >
                   Continue
                 </Button>
@@ -229,7 +251,6 @@ const SignUp = () => {
                   fontWeight={'medium'}
                   color={'#718096'}
                   w={['300px', null, '400px']}
-                  // textAlign="left"
                 >
                   By creating an account, you agree to Susu’s
                   <span
