@@ -19,8 +19,10 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import Image from 'next/image'
 import susuAuthPic from '../../../assets/susu_auth.svg'
+import { signIn } from 'next-auth/react'
 import useToggle from '../../../hooks/useToggle'
 import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai'
+import { FcGoogle } from 'react-icons/fc'
 import Link from 'next/link'
 
 const Login = () => {
@@ -149,12 +151,27 @@ const Login = () => {
                   color="white"
                   _hover={{ bg: 'teal.400' }}
                   bg="#20ddbe"
+                  onClick={() => signIn()}
                 >
                   Continue
                 </Button>
+                <Button
+                  w={['300px', null, '400px']}
+                  h={'60px'}
+                  color="white"
+                  border={'1px solid #20ddbe'}
+                  _hover={{
+                    bg: useColorModeValue('primary.200', 'teal.400'),
+                    border: 'none',
+                  }}
+                  bg={bg}
+                  onClick={() => signIn()}
+                >
+                  <FcGoogle size={30} />
+                </Button>
                 <Box display={'flex'} justifyContent="center">
                   <Text size="12px" fontWeight={500} marginRight={4}>
-                    New here?
+                    New here? 
                   </Text>
                   <Link href={'/auth/signup'}>
                     <Text color="#20ddbe" _hover={{ color: 'teal.400' }}>
