@@ -18,12 +18,13 @@ export const theme = extendTheme({
       500: '#20ddbe',
       400: '#40e3c8',
       300: '#7fecda',
-      200: '#bff5ec'
+      200: '#bff5ec',
     },
     secondary: {
       500: ' #209edd',
     },
     susuDarkBg: '#1F2023',
     susuColor: '#1A202C',
+
   },
 })

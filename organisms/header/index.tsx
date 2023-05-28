@@ -10,10 +10,6 @@ import {
   Input,
   InputGroup,
   InputRightElement,
-  Tab,
-  TabIndicator,
-  TabList,
-  Tabs,
   useColorModeValue,
   useDisclosure,
   VisuallyHidden,
@@ -149,95 +145,8 @@ const Header = () => {
           </HStack>
         </Flex>
       </chakra.header>
-      <Flex
-        alignItems="center"
-        justifyContent="space-between"
-        mx={2}
-        borderWidth={0}
-        overflowX="auto"
-      >
-        <Tabs
-          defaultIndex={1}
-          borderBottomColor="transparent"
-          isLazy
-          colorScheme="telegram"
-        >
-          <TabList>
-            <Tab
-              py={4}
-              m={0}
-              _focus={{
-                boxShadow: 'none',
-              }}
-              fontSize={'xl'}
-              fontWeight={'medium'}
-            >
-              Clients
-            </Tab>
-            <Tab
-              py={4}
-              m={0}
-              _focus={{
-                boxShadow: 'none',
-              }}
-              fontSize={'xl'}
-              fontWeight={'medium'}
-            >
-              Deposits
-            </Tab>
-            <Tab
-              py={4}
-              m={0}
-              _focus={{
-                boxShadow: 'none',
-              }}
-              fontSize={'xl'}
-              fontWeight={'medium'}
-            >
-              Savings
-            </Tab>
-            <Tab
-              py={4}
-              m={0}
-              _focus={{
-                boxShadow: 'none',
-              }}
-              fontSize={'xl'}
-              fontWeight={'medium'}
-            >
-              Loans
-            </Tab>
-            <Tab
-              py={4}
-              m={0}
-              _focus={{
-                boxShadow: 'none',
-              }}
-              fontSize={'xl'}
-              fontWeight={'medium'}
-            >
-              Reports
-            </Tab>
-          </TabList>
-          <TabIndicator bg="secondary.500" />
-        </Tabs>
-      </Flex>
     </Fragment>
   )
 }
 
 export default Header
-
-// const MenuItem: React.FC<MenuItemProps> = ({ text }) => {
-//   return (
-//     <Box
-//       as={motion.div}
-//       paddingX={10}
-//       paddingY={5}
-//       pos="relative"
-//       cursor="pointer"
-//     >
-//       <Box fontWeight={"bold"}>{text}</Box>
-//     </Box>
-//   )
-// }
