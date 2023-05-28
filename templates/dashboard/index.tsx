@@ -30,7 +30,7 @@ const Dashboard = () => {
       overflowX="auto"
     >
       <Tabs
-        defaultIndex={1}
+        defaultIndex={0}
         borderBottomColor="transparent"
         isLazy
         colorScheme="telegram"
