@@ -22,9 +22,11 @@ import {
   AiOutlineMenu,
   AiOutlineSearch,
 } from 'react-icons/ai'
+import { ToggleColor } from '../../lib/colorMode'
 
 const Header = () => {
-  const bg = useColorModeValue('white', 'susuDarkBg')
+  const bg = useColorModeValue('gray.300', 'susuDarkBg')
+  // const borderColor = useColorModeValue('susuDarkBg', 'susuDarkBg')
   const mobileNav = useDisclosure()
   return (
     <Fragment>
@@ -113,12 +115,15 @@ const Header = () => {
             alignItems="center"
           >
             <InputGroup>
-              <Input type="tel" placeholder="Search..." />
+              <Input
+                borderColor={"#93a0b0"}
+                type="tel"
+                placeholder="Search..."
+              />
               <InputRightElement pointerEvents="none">
                 <AiOutlineSearch />
               </InputRightElement>
             </InputGroup>
-
             <chakra.a
               p={3}
               color="gray.800"
@@ -136,12 +141,12 @@ const Header = () => {
               <AiFillBell />
               <VisuallyHidden>Notifications</VisuallyHidden>
             </chakra.a>
-
             <Avatar
               size="sm"
               name="Dan Abrahmov"
               src="https://bit.ly/dan-abramov"
             />
+            <ToggleColor />
           </HStack>
         </Flex>
       </chakra.header>

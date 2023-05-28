@@ -21,7 +21,10 @@ export const theme = extendTheme({
       200: '#bff5ec',
     },
     secondary: {
+    50: "rgba(32, 158, 221, 0.2)",
+    100: "rgba(32, 158, 221, 0.4)",
       500: ' #209edd',
+
     },
     susuDarkBg: '#1F2023',
     susuColor: '#1A202C',
