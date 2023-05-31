@@ -19,6 +19,8 @@ export const theme = extendTheme({
       400: '#40e3c8',
       300: '#7fecda',
       200: '#bff5ec',
+      100: '#bff5ec80',
+      50: '#bdf5eb33'
     },
     secondary: {
     50: "rgba(32, 158, 221, 0.2)",

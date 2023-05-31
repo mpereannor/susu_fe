@@ -23,6 +23,7 @@ import {
   useColorModeValue,
 } from '@chakra-ui/react'
 import { AiOutlineSearch } from 'react-icons/ai'
+import ActionMenu from '../../organisms/menu'
 import Tables from '../tables'
 
 const Dashboard = () => {
@@ -126,15 +127,7 @@ const Dashboard = () => {
               width={'40%'}
             >
               <Flex padding={5}>
-                <Button
-                  h={'40px'}
-                  color="white"
-                  _hover={{ bg: 'teal.400' }}
-                  bg="#20ddbe"
-                  type="submit"
-                >
-                  Register New Client
-                </Button>
+                <ActionMenu />
                 <Spacer />
                 <InputGroup w={['200px']}>
                   <Input
